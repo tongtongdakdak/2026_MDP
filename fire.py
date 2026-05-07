@@ -4,7 +4,6 @@ import pandas as pd
 
 class FireDetect:
     def __init__(self, model_path):
-        print(f"load model: {model_path}")
         self.model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path)
         self.cap = None
 
@@ -49,7 +48,7 @@ class FireDetect:
         if self.cap:
             self.cap.release()
         cv2.destroyAllWindows()
-        print("시스템이 종료되었습니다.")
+        print("햣!종료")
 
 if __name__ == "__main__":
     detector = FireDetect(model_path='yolov5s_fire.pt')
