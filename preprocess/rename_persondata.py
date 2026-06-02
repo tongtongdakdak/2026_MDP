@@ -1,12 +1,11 @@
 import os
 import glob
 
-# 데이터셋 루트 경로 (상황에 맞게 수정하세요)
-dataset_path = r'C:\Users\namul\Desktop\person_dataset' 
+dataset_path = r'C:\Users\namul\Desktop\???' 
 
 txt_files = glob.glob(os.path.join(dataset_path, '**', '*.txt'), recursive=True)
 
-print(f"총 {len(txt_files)}개의 파일을 수정합니다.")
+print(f"수정할 파일 수: {len(txt_files)}")
 
 for file_path in txt_files:
     if 'README.dataset.txt' in file_path:
@@ -25,4 +24,4 @@ for file_path in txt_files:
                 parts[0] = '1'
                 f.write(' '.join(parts) + '\n')
 
-print("변경 완료!")
+print("끝")

@@ -1,4 +1,5 @@
-*.pt
-dataset/
-ai.zip
-*.json
+/dataset
+/runs
+client.py
+yolo26n.pt
+room.png

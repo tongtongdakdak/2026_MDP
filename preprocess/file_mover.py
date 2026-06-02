@@ -7,7 +7,7 @@ prefix = "marvel_0017_"
 def move_and_rename_images(src, dst, file_prefix):
     if not os.path.exists(dst):
         os.makedirs(dst)
-        print(f"폴더를 생성: {dst}")
+        print(f"생성한 폴더: {dst}")
 
     files = os.listdir(src)
     count = 0
@@ -23,9 +23,7 @@ def move_and_rename_images(src, dst, file_prefix):
             count += 1
             print(f"이동 완료: {filename} -> {new_filename}")
 
-    print("-" * 30)
-    print(f"총 {count}개의 파일이동")
+    print(f"이동한 총 파일 개수: {count}")
 
-# 함수 실행
 if __name__ == "__main__":
     move_and_rename_images(source_dir, target_dir, prefix)
