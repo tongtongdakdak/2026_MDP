@@ -1,5 +1,7 @@
 /dataset
 /runs
+/lego_detection
+/preprocess
 client.py
 yolo26n.pt
 room.png
