@@ -11,7 +11,6 @@ class EvacuationEngine:
         self.init_building_map()
 
     def init_building_map(self):
-        # 각 방에서 인접한 복도로 나오는 정상 연결 구조
         self.graph.add_edge("방_1", "복도_1", base_dist=2.0)
         self.graph.add_edge("방_2", "복도_1", base_dist=2.0)
         self.graph.add_edge("방_3", "복도_2", base_dist=2.0)
