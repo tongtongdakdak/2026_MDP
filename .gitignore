@@ -5,3 +5,5 @@
 client.py
 yolo26n.pt
 room.png
+/__pycache__
+/.vscode
