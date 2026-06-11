@@ -1,0 +1,132 @@
+body { 
+    font-family: 'Malgun Gothic', sans-serif; 
+    text-align: center; 
+    margin: 0;
+    padding: 20px 10px;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+h1 { color: #0f172a; margin-bottom: 5px; font-size: 1.8rem; }
+.summary { font-size: 1.1rem; margin-bottom: 25px; font-weight: bold; }
+
+.map-container {
+    position: relative;
+    width: 660px;
+    height: 440px;
+    /* 🎯 0.75 축소 비율에 맞추어 아래 여백 마진을 줄여 하단 상자가 바로 밑에 붙도록 수정 */
+    margin: 10px auto -60px auto; 
+    background-color: #cbd5e1;
+    border: 4px solid #0f172a;
+    border-radius: 8px;
+    /* 🎯 축소 스케일 0.75 지정 */
+    transform: scale(0.75); 
+    transform-origin: top center; 
+}
+
+.zone-block {
+    position: absolute;
+    background-color: #ffffff;
+    border: 2px solid #1e293b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 4px;
+    cursor: pointer;
+}
+.zone-name { font-size: 0.72rem; font-weight: bold; color: #475569; margin-bottom: 2px; }
+.zone-info { font-size: 0.85rem; font-weight: bold; color: #2563eb; }
+
+.hallway-label {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: bold;
+    z-index: 10;
+    cursor: pointer;
+    text-align: center;
+}
+.hallway-label .zone-name { color: #334155; margin-bottom: 1px; }
+.hallway-label .zone-info { color: #2563eb; font-size: 0.85rem; }
+
+.zone-fire {
+    border-color: #b91c1c !important;
+    z-index: 5;
+    animation: blink-room 0.8s infinite alternate;
+}
+.zone-fire .zone-name, .zone-fire .zone-info { color: #ffffff !important; }
+
+@keyframes blink-room {
+    0% { background-color: #ef4444; }
+    100% { background-color: #f87171; }
+}
+
+.hallway-fire {
+    background-color: #b91c1c !important;
+    padding: 4px 6px;
+    border-radius: 4px;
+    animation: blink-room 0.8s infinite alternate;
+}
+.hallway-fire .zone-name, .hallway-fire .zone-info { color: #ffffff !important; }
+
+.door {
+    position: absolute;
+    background-color: #fbbf24;
+    border: 1px solid #d97706;
+    z-index: 3;
+}
+
+.exit-door {
+    position: absolute;
+    background-color: #22c55e;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    border: 2px solid #14532d;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+.exit-vertical { writing-mode: vertical-rl; }
+
+#route-container {
+    /* 🎯 660px의 0.75배인 495px로 가로길이를 맞춰 레이아웃 균형 유지 */
+    width: 495px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #eff6ff;
+    border: 2px solid #2563eb;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1e40af;
+    min-height: 24px;
+    /* 안드로이드 가로 패딩이 밖으로 튀어나가지 않도록 가두는 속성 */
+    box-sizing: border-box; 
+}
+
+/* 🎯 정밀 선 스타일 정의 */
+#route-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 660px;
+    height: 440px;
+    pointer-events: none;
+    z-index: 100;
+}
+
+#route-line {
+    stroke: #2563eb;          /* 깔끔한 파란색 경로선 */
+    stroke-width: 5px;        /* 선 두께 */
+    fill: none;
+    stroke-linejoin: round;   /* 꺾임쇠 라운드 처리로 부드럽게 */
+    stroke-linecap: round;
+    marker-end: url(#arrow);
+}

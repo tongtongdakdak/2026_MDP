@@ -3,6 +3,7 @@
 /lego_detection
 /preprocess
 client.py
+best.pt
 yolo26n.pt
 room.png
 train.py

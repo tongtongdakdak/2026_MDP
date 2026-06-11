@@ -4,115 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모니터링 시스템</title>
-    <style>
-        body { 
-            font-family: 'Malgun Gothic', sans-serif; 
-            text-align: center; 
-            margin: 0;
-            padding: 20px 10px;
-            background-color: #f8fafc;
-            color: #1e293b;
-        }
-        h1 { color: #0f172a; margin-bottom: 5px; font-size: 1.8rem; }
-        .summary { font-size: 1.1rem; margin-bottom: 25px; font-weight: bold; }
-        
-        .map-container {
-            position: relative;
-            width: 660px;
-            height: 440px;
-            margin: 10px auto 160px auto; 
-            background-color: #cbd5e1;
-            border: 4px solid #0f172a;
-            border-radius: 8px;
-            transform: scale(1.35); 
-            transform-origin: top center; 
-        }
-        
-        .zone-block {
-            position: absolute;
-            background-color: #ffffff;
-            border: 2px solid #1e293b;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
-            padding: 4px;
-            cursor: pointer;
-        }
-        .zone-name { font-size: 0.72rem; font-weight: bold; color: #475569; margin-bottom: 2px; }
-        .zone-info { font-size: 0.85rem; font-weight: bold; color: #2563eb; }
-        
-        .hallway-label {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.72rem;
-            font-weight: bold;
-            z-index: 10;
-            cursor: pointer;
-            text-align: center;
-        }
-        .hallway-label .zone-name { color: #334155; margin-bottom: 1px; }
-        .hallway-label .zone-info { color: #2563eb; font-size: 0.85rem; }
-        
-        .zone-fire {
-            border-color: #b91c1c !important;
-            z-index: 5;
-            animation: blink-room 0.8s infinite alternate;
-        }
-        .zone-fire .zone-name, .zone-fire .zone-info { color: #ffffff !important; }
-        
-        @keyframes blink-room {
-            0% { background-color: #ef4444; }
-            100% { background-color: #f87171; }
-        }
-        
-        .hallway-fire {
-            background-color: #b91c1c !important;
-            padding: 4px 6px;
-            border-radius: 4px;
-            animation: blink-room 0.8s infinite alternate;
-        }
-        .hallway-fire .zone-name, .hallway-fire .zone-info { color: #ffffff !important; }
-        
-        .door {
-            position: absolute;
-            background-color: #fbbf24;
-            border: 1px solid #d97706;
-            z-index: 3;
-        }
-
-        .exit-door {
-            position: absolute;
-            background-color: #22c55e;
-            color: white;
-            font-size: 0.65rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
-            border: 2px solid #14532d;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-        }
-        .exit-vertical { writing-mode: vertical-rl; }
-
-        #route-container {
-            width: 660px;
-            margin: 20px auto;
-            padding: 15px;
-            background-color: #eff6ff;
-            border: 2px solid #2563eb;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #1e40af;
-            min-height: 24px;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <h1>모니터링 시스템</h1>
@@ -122,6 +14,15 @@
     </div>
     
     <div id="main-map" class="map-container">
+        <svg id="route-canvas">
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+                </marker>
+            </defs>
+            <polyline id="route-line" points="" />
+        </svg>
+
         <div class="exit-door exit-vertical" style="left: -14px; top: 195px; width: 14px; height: 45px; border-right: none;">출구 1</div>
         <div class="exit-door" style="left: 295px; top: 438px; width: 45px; height: 14px; border-top: none;">출구 2</div>
         <div class="exit-door exit-vertical" style="left: 658px; top: 345px; width: 14px; height: 30px; border-left: none;">출구 3</div>
@@ -212,66 +113,7 @@
     </div>
     
     <div id="route-container">클릭하여 최적 대피 경로를 확인하세요.</div>
-    
-    <script>
-        function showRoute(zone) {
-            fetch('/get-routes')
-                .then(response => response.json())
-                .then(routes => {
-                    const container = document.getElementById('route-container');
-                    let displayZone = zone.replace("_", " ");
-                    if (routes && routes[zone]) {
-                        container.innerText = displayZone + " 대피 경로: " + routes[zone];
-                    } else {
-                        container.innerText = "경로 정보를 가져오는 중이거나 경로가 없습니다.";
-                    }
-                })
-                .catch(error => {});
-        }
 
-        function fetchData() {
-            fetch('/get-data?_=' + Date.now())
-                .then(response => {
-                    if (!response.ok) throw new Error('Data Error');
-                    return response.json();
-                })
-                .then(data => {
-                    let totalFigureCount = 0;
-                    let isAnyFireDetected = false;
-                    Object.keys(data).forEach(zone => {
-                        const zoneData = data[zone];
-                        totalFigureCount += zoneData.figure_count;
-                        const countEl = document.getElementById(`count-${zone}`);
-                        if (countEl) countEl.innerText = zoneData.figure_count;
-                        
-                        const cardEl = document.getElementById(`card-${zone}`);
-                        if (cardEl) {
-                            if (zoneData.fire_detected) {
-                                isAnyFireDetected = true;
-                                if (zone.startsWith("복도")) {
-                                    cardEl.classList.add('hallway-fire');
-                                } else {
-                                    cardEl.classList.add('zone-fire');
-                                }
-                            } else {
-                                cardEl.classList.remove('zone-fire', 'hallway-fire');
-                            }
-                        }
-                    });
-                    document.getElementById('total-count').innerText = totalFigureCount;
-                    const totalStatusEl = document.getElementById('total-status');
-                    if (isAnyFireDetected) {
-                        totalStatusEl.innerText = "화재 발생!";
-                        totalStatusEl.style.color = "#dc3545";
-                    } else {
-                        totalStatusEl.innerText = "안전";
-                        totalStatusEl.style.color = "#16a34a";
-                    }
-                })
-                .catch(error => {});
-        }
-        setInterval(fetchData, 1000);
-        fetchData();
-    </script>
+    <script src="/static/scripts.js"></script>
 </body>
 </html>

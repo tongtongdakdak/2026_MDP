@@ -23,17 +23,15 @@ class EvacuationEngine:
         self.graph.add_edge("방_9", "복도_5", base_dist=2.0)
         
         self.graph.add_edge("방_10", "복도_3", base_dist=2.0)
-        self.graph.add_edge("방_10", "복도_5", base_dist=2.0)
         
         self.graph.add_edge("방_11", "복도_6", base_dist=1.5)
-        self.graph.add_edge("방_12", "복도_6", base_dist=1.5)
-        self.graph.add_edge("방_13", "복도_6", base_dist=1.5)
+        self.graph.add_edge("방_12", "복도_7", base_dist=1.5)
+        self.graph.add_edge("방_13", "방_10", base_dist=1.5)
+        self.graph.add_edge("방_15", "복도_6", base_dist=2.0)
         
         self.graph.add_edge("방_14", "복도_7", base_dist=2.0)
-        self.graph.add_edge("방_15", "복도_6", base_dist=2.0)
-        self.graph.add_edge("방_15", "복도_7", base_dist=2.0)
         
-        # 복도와 복도 사이의 연결망
+        #Hall to Hall
         self.graph.add_edge("복도_1", "복도_2", base_dist=2.5)
         self.graph.add_edge("복도_2", "복도_3", base_dist=2.5)
         self.graph.add_edge("복도_3", "복도_4", base_dist=2.5)
@@ -42,11 +40,11 @@ class EvacuationEngine:
         self.graph.add_edge("복도_4", "복도_6", base_dist=2.5)
         self.graph.add_edge("복도_6", "복도_7", base_dist=2.5)
         
-        # 복도에서 최종 외부 출구로 나가는 길
+        # Hall to Gate
         self.graph.add_edge("복도_1", "출구_1", base_dist=2.0)
         self.graph.add_edge("복도_5", "출구_2", base_dist=2.0)
         self.graph.add_edge("복도_7", "출구_3", base_dist=2.0)
-
+        
     def fetch_sensor_data(self):
         try:
             response = requests.get(f"{self.server_url}/get-data", timeout=1.0)
