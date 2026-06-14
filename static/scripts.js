@@ -1,144 +1,141 @@
-// 📍 도면 복도 중앙선 정밀 좌표 인덱스
 const corridorAxes = {
-    horizontalMain: 220, // 복도 1, 2, 3, 4의 공통 가로 중심선 (Y축)
-    복도_5: 315,         // 복도 5 세로 중심선 (X축)
-    복도_6: 550,         // 복도 6 세로 중심선 (X축)
-    복도_7: 355          // 복도 7 가로 중심선 (Y축)
+    horizontalMain: 220,
+    Hallway_5: 315,
+    Hallway_6: 550,
+    Hallway_7: 355
 };
 
-// 📍 방 내부에서 문을 거쳐 복도로 수직/수평 탈출하는 유도 포인트 세트
 function getRoomDoorWaypoints(room, nextCorridor) {
     switch(room) {
-        case "방_1":  return { inside: {x: 55, y: 130}, hallway: {x: 55, y: corridorAxes.horizontalMain} };
-        case "방_2":  return { inside: {x: 150, y: 130}, hallway: {x: 150, y: corridorAxes.horizontalMain} };
-        case "방_3":  return { inside: {x: 255, y: 170}, hallway: {x: 255, y: corridorAxes.horizontalMain} };
-        case "방_4":  return { inside: {x: 365, y: 170}, hallway: {x: 365, y: corridorAxes.horizontalMain} };
-        case "방_5":  return { inside: {x: 460, y: 170}, hallway: {x: 460, y: corridorAxes.horizontalMain} };
-        case "방_6":  return { inside: {x: 540, y: 170}, hallway: {x: 540, y: corridorAxes.horizontalMain} };
-        case "방_7":  return { inside: {x: 160, y: 270}, hallway: {x: 160, y: corridorAxes.horizontalMain} };
-        case "방_8":  return { inside: {x: 240, y: 270}, hallway: {x: 240, y: corridorAxes.horizontalMain} };
-        case "방_9":  return { inside: {x: 270, y: 395}, hallway: {x: corridorAxes.복도_5, y: 395} };
-        case "방_10": 
-            if (nextCorridor === "복도_5") {
-                return { inside: {x: 360, y: 395}, hallway: {x: corridorAxes.복도_5, y: 395} };
+        case "Room_1": return { inside: {x: 55, y: 130}, hallway: {x: 55, y: corridorAxes.horizontalMain} };
+        case "Room_2": return { inside: {x: 150, y: 130}, hallway: {x: 150, y: corridorAxes.horizontalMain} };
+        case "Room_3": return { inside: {x: 255, y: 170}, hallway: {x: 255, y: corridorAxes.horizontalMain} };
+        case "Room_4": return { inside: {x: 365, y: 170}, hallway: {x: 365, y: corridorAxes.horizontalMain} };
+        case "Room_5": return { inside: {x: 460, y: 170}, hallway: {x: 460, y: corridorAxes.horizontalMain} };
+        case "Room_6": return { inside: {x: 540, y: 170}, hallway: {x: 540, y: corridorAxes.horizontalMain} };
+        case "Room_7": return { inside: {x: 160, y: 270}, hallway: {x: 160, y: corridorAxes.horizontalMain} };
+        case "Room_8": return { inside: {x: 240, y: 270}, hallway: {x: 240, y: corridorAxes.horizontalMain} };
+        case "Room_9": return { inside: {x: 270, y: 395}, hallway: {x: corridorAxes.Hallway_5, y: 395} };
+        case "Room_10": 
+            if (nextCorridor === "Hallway_5") {
+                return { inside: {x: 360, y: 395}, hallway: {x: corridorAxes.Hallway_5, y: 395} };
             } else {
                 return { inside: {x: 390, y: 270}, hallway: {x: 390, y: corridorAxes.horizontalMain} };
             }
-        case "방_11": return { inside: {x: 510, y: 270}, hallway: {x: corridorAxes.복도_6, y: 270} };
-        case "방_12": return { inside: {x: 510, y: 330}, hallway: {x: corridorAxes.복도_6, y: 330} };
-        case "방_13": return { inside: {x: 510, y: 405}, hallway: {x: corridorAxes.복도_6, y: 405} };
-        case "방_14": return { inside: {x: 595, y: 390}, hallway: {x: 595, y: corridorAxes.복도_7} };
-        case "방_15": return { inside: {x: 590, y: 260}, hallway: {x: corridorAxes.복도_6, y: 260} };
+        case "Room_11": return { inside: {x: 510, y: 270}, hallway: {x: corridorAxes.Hallway_6, y: 270} };
+        case "Room_12": return { inside: {x: 510, y: 330}, hallway: {x: corridorAxes.Hallway_6, y: 330} };
+        case "Room_13": 
+            if (nextCorridor === "Room_10") {
+                return { inside: {x: 440, y: 395}, hallway: {x: 390, y: 395} };
+            } else {
+                return { inside: {x: 510, y: 405}, hallway: {x: corridorAxes.Hallway_6, y: 405} };
+            }
+        case "Room_14": return { inside: {x: 595, y: 390}, hallway: {x: 595, y: corridorAxes.Hallway_7} };
+        case "Room_15": return { inside: {x: 590, y: 260}, hallway: {x: corridorAxes.Hallway_6, y: 260} };
         default: return null;
     }
 }
 
-// 📍 최종 탈출구 터미널 포인트
 function getExitPoint(exitName) {
     switch(exitName) {
-        case "출구_1": return {x: 0, y: corridorAxes.horizontalMain};
-        case "출구_2": return {x: corridorAxes.복도_5, y: 440};
-        case "출구_3": return {x: 660, y: corridorAxes.복도_7};
+        case "Exit_1": return {x: 0, y: corridorAxes.horizontalMain};
+        case "Exit_2": return {x: corridorAxes.Hallway_5, y: 440};
+        case "Exit_3": return {x: 660, y: corridorAxes.Hallway_7};
         default: return null;
     }
 }
 
-// 📍 복도와 복도가 교차하여 회전할 때 생성되는 90도 직각 노드 산출 엔진
 function getCorridorIntersection(current, next) {
-    const mainHoriz = ["복도_1", "복도_2", "복도_3", "복도_4"];
-    
-    if (mainHoriz.includes(current) && next === "복도_5") return {x: corridorAxes.복도_5, y: corridorAxes.horizontalMain};
-    if (mainHoriz.includes(current) && next === "복도_6") return {x: corridorAxes.복도_6, y: corridorAxes.horizontalMain};
-    if (current === "복도_5" && mainHoriz.includes(next)) return {x: corridorAxes.복도_5, y: corridorAxes.horizontalMain};
-    if (current === "복도_6" && mainHoriz.includes(next)) return {x: corridorAxes.복도_6, y: corridorAxes.horizontalMain};
-    if (current === "복도_6" && next === "복도_7") return {x: corridorAxes.복도_6, y: corridorAxes.복도_7};
-    if (current === "복도_7" && next === "복도_6") return {x: corridorAxes.복도_6, y: corridorAxes.복도_7};
-    
+    const mainHoriz = ["Hallway_1", "Hallway_2", "Hallway_3", "Hallway_4"];
+    if (mainHoriz.includes(current) && next === "Hallway_5" || current === "Hallway_5" && mainHoriz.includes(next)) {
+        return {x: corridorAxes.Hallway_5, y: corridorAxes.horizontalMain};
+    }
+    if (mainHoriz.includes(current) && next === "Hallway_6" || current === "Hallway_6" && mainHoriz.includes(next)) {
+        return {x: corridorAxes.Hallway_6, y: corridorAxes.horizontalMain};
+    }
+    if (mainHoriz.includes(current) && next === "Hallway_7" || current === "Hallway_7" && mainHoriz.includes(next)) {
+        return {x: corridorAxes.Hallway_7, y: corridorAxes.horizontalMain};
+    }
     return null;
 }
 
-// 📍 정밀 직각 선 렌더링 함수
-function drawOrthogonalRoute(routeText) {
-    const polyline = document.getElementById('route-line');
-    if (!routeText || routeText.includes("고립됨")) {
-        polyline.setAttribute("points", "");
+const zoneCenters = {
+    "Hallway_1": {x: 105, y: corridorAxes.horizontalMain},
+    "Hallway_2": {x: 200, y: corridorAxes.horizontalMain},
+    "Hallway_3": {x: 425, y: corridorAxes.horizontalMain},
+    "Hallway_4": {x: 600, y: corridorAxes.horizontalMain},
+    "Hallway_5": {x: corridorAxes.Hallway_5, y: 350},
+    "Hallway_6": {x: corridorAxes.Hallway_6, y: 350},
+    "Hallway_7": {x: corridorAxes.Hallway_7, y: 250}
+};
+
+let currentRouteData = {};
+
+function showRoute(zone) {
+    const routeTextContainer = document.getElementById('route-container');
+    const routeCanvas = document.getElementById('route-line');
+    const routeInfo = currentRouteData[zone];
+    
+    if (!routeInfo || !routeInfo.path || routeInfo.path.length === 0) {
+        let koZone = zone.replace("Room_", "방 ").replace("Hallway_", "복도 ");
+        routeTextContainer.innerText = `${koZone}: 고립됨 (대피 경로 없음)`;
+        routeTextContainer.style.color = "#dc3545";
+        routeCanvas.setAttribute("points", "");
         return;
     }
 
-    // "방 13 -> 복도 6 -> 복도 7 -> 출구 3" 공백 제거 및 토큰화
-    const tokens = routeText.split("->").map(t => t.trim().replace(" ", "_"));
+    routeTextContainer.innerText = `최적 대피 경로: ${routeInfo.text}`;
+    routeTextContainer.style.color = "#1e40af";
+
     let points = [];
+    let lastPos = null;
+    const path = routeInfo.path;
 
-    // 1. 출발지 노드 처리
-    if (tokens[0].startsWith("방")) {
-        const waypoints = getRoomDoorWaypoints(tokens[0], tokens[1]);
-        if (waypoints) {
-            points.push(waypoints.inside);   // 방 내부 시작
-            points.push(waypoints.hallway);  // 복도 축 안착
-        }
-    } else if (tokens[0].startsWith("복도")) {
-        // 복도에서 직접 시작할 경우 텍스트 라벨 좌표 추정 매핑
-        const labelPositions = { "복도_1": 90, "복도_2": 230, "복도_3": 370, "복도_4": 500 };
-        if (labelPositions[tokens[0]]) {
-            points.push({x: labelPositions[tokens[0]], y: corridorAxes.horizontalMain});
-        } else if (tokens[0] === "복도_5") {
-            points.push({x: corridorAxes.복도_5, y: 320});
-        } else if (tokens[0] === "복도_6") {
-            points.push({x: corridorAxes.복도_6, y: 250});
-        } else if (tokens[0] === "복도_7") {
-            points.push({x: 585, y: corridorAxes.복도_7});
-        }
-    }
-
-    // 2. 복도 교차 구간 90도 회전점 추적
-    for (let i = 1; i < tokens.length - 1; i++) {
-        const curr = tokens[i];
-        const next = tokens[i+1];
-        if (curr.startsWith("복도")) {
-            const turnPoint = getCorridorIntersection(curr, next);
-            if (turnPoint) {
-                points.push(turnPoint);
+    for(let i=0; i<path.length; i++) {
+        const node = path[i];
+        if (node.startsWith("Room_")) {
+            const nextNode = path[i+1];
+            const waypoints = getRoomDoorWaypoints(node, nextNode);
+            if (waypoints) {
+                points.push(`${waypoints.inside.x},${waypoints.inside.y}`);
+                points.push(`${waypoints.hallway.x},${waypoints.hallway.y}`);
+                lastPos = waypoints.hallway;
+            }
+        } else if (node.startsWith("Hallway_")) {
+            const center = zoneCenters[node];
+            if (lastPos && lastPos.x !== center.x && lastPos.y !== center.y) {
+                const inter = getCorridorIntersection(path[i-1], node);
+                if (inter) points.push(`${inter.x},${inter.y}`);
+            }
+            if (center) {
+                points.push(`${center.x},${center.y}`);
+                lastPos = center;
+            }
+        } else if (node.startsWith("Exit_")) {
+            const exitPoint = getExitPoint(node);
+            if (exitPoint) {
+                if (lastPos && lastPos.x !== exitPoint.x && lastPos.y !== exitPoint.y) {
+                    points.push(`${exitPoint.x},${lastPos.y}`);
+                }
+                points.push(`${exitPoint.x},${exitPoint.y}`);
             }
         }
     }
-
-    // 3. 목적지 탈출구 매핑
-    const lastToken = tokens[tokens.length - 1];
-    if (lastToken.startsWith("출구")) {
-        const exitPoint = getExitPoint(lastToken);
-        if (exitPoint) points.push(exitPoint);
-    }
-
-    // 4. SVG Polyline 요소에 좌표 문자열 주입 ("x,y x,y ...")
-    const pointsString = points.map(p => `${p.x},${p.y}`).join(" ");
-    polyline.setAttribute("points", pointsString);
+    routeCanvas.setAttribute("points", points.join(" "));
 }
 
-// 📍 클릭 시 라우팅 정보 표시 연동
-function showRoute(zone) {
+setInterval(() => {
     fetch('/get-routes')
-        .then(response => response.json())
-        .then(routes => {
-            const container = document.getElementById('route-container');
-            let displayZone = zone.replace("_", " ");
-            if (routes && routes[zone]) {
-                container.innerText = displayZone + " 대피 경로: " + routes[zone];
-                drawOrthogonalRoute(routes[zone]); // 직각 경로 그리기 실행
-            } else {
-                container.innerText = "경로 정보를 가져오는 중이거나 경로가 없습니다.";
-                document.getElementById('route-line').setAttribute("points", "");
-            }
+        .then(res => res.json())
+        .then(data => {
+            currentRouteData = data;
         })
-        .catch(error => console.error("Route Fetch Error:", error));
-}
+        .catch(() => {});
+}, 1000);
 
-// 📍 센서 모니터링 주기 데이터 수신 전송
 function fetchData() {
-    fetch('/get-data?_=' + Date.now())
-        .then(response => {
-            if (!response.ok) throw new Error('Data Error');
-            return response.json();
-        })
+    fetch('/get-data')
+        .then(response => response.json())
         .then(data => {
             let totalFigureCount = 0;
             let isAnyFireDetected = false;
@@ -152,7 +149,7 @@ function fetchData() {
                 if (cardEl) {
                     if (zoneData.fire_detected) {
                         isAnyFireDetected = true;
-                        if (zone.startsWith("복도")) {
+                        if (zone.startsWith("Hallway_")) {
                             cardEl.classList.add('hallway-fire');
                         } else {
                             cardEl.classList.add('zone-fire');
@@ -172,9 +169,8 @@ function fetchData() {
                 totalStatusEl.style.color = "#16a34a";
             }
         })
-        .catch(error => console.error("Data Fetch Error:", error));
+        .catch(() => {});
 }
 
-// 초기 로드 루프 가동
 setInterval(fetchData, 1000);
 fetchData();

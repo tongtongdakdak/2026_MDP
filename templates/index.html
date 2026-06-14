@@ -24,96 +24,79 @@
         </svg>
 
         <div class="exit-door exit-vertical" style="left: -14px; top: 195px; width: 14px; height: 45px; border-right: none;">출구 1</div>
-        <div class="exit-door" style="left: 295px; top: 438px; width: 45px; height: 14px; border-top: none;">출구 2</div>
-        <div class="exit-door exit-vertical" style="left: 658px; top: 345px; width: 14px; height: 30px; border-left: none;">출구 3</div>
+        <div class="exit-door" style="left: 290px; top: 436px; width: 40px; height: 14px; border-top: none;">출구 2</div>
+        <div class="exit-door exit-vertical" style="left: 656px; top: 370px; width: 14px; height: 70px; border-left: none;">출구 3</div>
 
-        <div class="door" style="left: 50px; top: 146px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 150px; top: 146px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 250px; top: 186px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 360px; top: 186px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 460px; top: 186px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 530px; top: 186px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 160px; top: 246px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 240px; top: 246px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 286px; top: 390px; width: 8px; height: 20px;"></div>
-        <div class="door" style="left: 390px; top: 246px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 436px; top: 400px; width: 8px; height: 20px;"></div>
-        <div class="door" style="left: 526px; top: 270px; width: 8px; height: 20px;"></div>
-        <div class="door" style="left: 526px; top: 330px; width: 8px; height: 20px;"></div>
-        <div class="door" style="left: 585px; top: 366px; width: 20px; height: 8px;"></div>
-        <div class="door" style="left: 566px; top: 250px; width: 8px; height: 20px;"></div>
+        <div id="card-Room_1" class="zone-block" style="left: 0px; top: 0px; width: 110px; height: 150px;" onclick="showRoute('Room_1')">
+            <div class="zone-name">방 1</div><div class="zone-info"><span id="count-Room_1">0</span></div>
+        </div>
+        <div id="card-Room_2" class="zone-block" style="left: 110px; top: 0px; width: 80px; height: 150px;" onclick="showRoute('Room_2')">
+            <div class="zone-name">방 2</div><div class="zone-info"><span id="count-Room_2">0</span></div>
+        </div>
+        <div id="card-Room_3" class="zone-block" style="left: 190px; top: 0px; width: 130px; height: 190px;" onclick="showRoute('Room_3')">
+            <div class="zone-name">방 3</div><div class="zone-info"><span id="count-Room_3">0</span></div>
+        </div>
+        <div id="card-Room_4" class="zone-block" style="left: 320px; top: 0px; width: 95px; height: 190px;" onclick="showRoute('Room_4')">
+            <div class="zone-name">방 4</div><div class="zone-info"><span id="count-Room_4">0</span></div>
+        </div>
+        <div id="card-Room_5" class="zone-block" style="left: 415px; top: 0px; width: 95px; height: 190px;" onclick="showRoute('Room_5')">
+            <div class="zone-name">방 5</div><div class="zone-info"><span id="count-Room_5">0</span></div>
+        </div>
+        <div id="card-Room_6" class="zone-block" style="left: 510px; top: 0px; width: 150px; height: 190px;" onclick="showRoute('Room_6')">
+            <div class="zone-name">방 6</div><div class="zone-info"><span id="count-Room_6">0</span></div>
+        </div>
+        <div id="card-Room_7" class="zone-block" style="left: 0px; top: 250px; width: 190px; height: 190px;" onclick="showRoute('Room_7')">
+            <div class="zone-name">방 7</div><div class="zone-info"><span id="count-Room_7">0</span></div>
+        </div>
+        <div id="card-Room_8" class="zone-block" style="left: 190px; top: 250px; width: 100px; height: 190px;" onclick="showRoute('Room_8')">
+            <div class="zone-name">방 8</div><div class="zone-info"><span id="count-Room_8">0</span></div>
+        </div>
+        <div id="card-Room_9" class="zone-block" style="left: 290px; top: 350px; width: 100px; height: 90px;" onclick="showRoute('Room_9')">
+            <div class="zone-name">방 9</div><div class="zone-info"><span id="count-Room_9">0</span></div>
+        </div>
+        <div id="card-Room_10" class="zone-block" style="left: 330px; top: 250px; width: 60px; height: 100px;" onclick="showRoute('Room_10')">
+            <div class="zone-name">방 10</div><div class="zone-info"><span id="count-Room_10">0</span></div>
+        </div>
+        <div id="card-Room_11" class="zone-block" style="left: 440px; top: 250px; width: 90px; height: 60px;" onclick="showRoute('Room_11')">
+            <div class="zone-name">방 11</div><div class="zone-info"><span id="count-Room_11">0</span></div>
+        </div>
+        <div id="card-Room_12" class="zone-block" style="left: 440px; top: 310px; width: 90px; height: 60px;" onclick="showRoute('Room_12')">
+            <div class="zone-name">방 12</div><div class="zone-info"><span id="count-Room_12">0</span></div>
+        </div>
+        <div id="card-Room_13" class="zone-block" style="left: 440px; top: 370px; width: 90px; height: 70px;" onclick="showRoute('Room_13')">
+            <div class="zone-name">방 13</div><div class="zone-info"><span id="count-Room_13">0</span></div>
+        </div>
+        <div id="card-Room_14" class="zone-block" style="left: 530px; top: 370px; width: 130px; height: 70px;" onclick="showRoute('Room_14')">
+            <div class="zone-name">방 14</div><div class="zone-info"><span id="count-Room_14">0</span></div>
+        </div>
+        <div id="card-Room_15" class="zone-block" style="left: 580px; top: 250px; width: 80px; height: 120px;" onclick="showRoute('Room_15')">
+            <div class="zone-name">방 15</div><div class="zone-info"><span id="count-Room_15">0</span></div>
+        </div>
 
-        <div id="card-복도_1" class="hallway-label" style="left: 90px; top: 195px;" onclick="showRoute('복도_1')">
-            <div class="zone-name">복도 1</div><div class="zone-info"><span id="count-복도_1">0</span></div>
+        <div id="card-Hallway_1" class="hallway-label" style="left: 80px; top: 210px;" onclick="showRoute('Hallway_1')">
+            <div class="zone-name">복도 1</div><div class="zone-info"><span id="count-Hallway_1">0</span></div>
         </div>
-        <div id="card-복도_2" class="hallway-label" style="left: 230px; top: 210px;" onclick="showRoute('복도_2')">
-            <div class="zone-name">복도 2</div><div class="zone-info"><span id="count-복도_2">0</span></div>
+        <div id="card-Hallway_2" class="hallway-label" style="left: 210px; top: 210px;" onclick="showRoute('Hallway_2')">
+            <div class="zone-name">복도 2</div><div class="zone-info"><span id="count-Hallway_2">0</span></div>
         </div>
-        <div id="card-복도_3" class="hallway-label" style="left: 370px; top: 210px;" onclick="showRoute('복도_3')">
-            <div class="zone-name">복도 3</div><div class="zone-info"><span id="count-복도_3">0</span></div>
+        <div id="card-Hallway_3" class="hallway-label" style="left: 345px; top: 210px;" onclick="showRoute('Hallway_3')">
+            <div class="zone-name">복도 3</div><div class="zone-info"><span id="count-Hallway_3">0</span></div>
         </div>
-        <div id="card-복도_4" class="hallway-label" style="left: 500px; top: 210px;" onclick="showRoute('복도_4')">
-            <div class="zone-name">복도 4</div><div class="zone-info"><span id="count-복도_4">0</span></div>
+        <div id="card-Hallway_4" class="hallway-label" style="left: 465px; top: 210px;" onclick="showRoute('Hallway_4')">
+            <div class="zone-name">복도 4</div><div class="zone-info"><span id="count-Hallway_4">0</span></div>
         </div>
-        <div id="card-복도_5" class="hallway-label" style="left: 300px; top: 320px;" onclick="showRoute('복도_5')">
-            <div class="zone-name">복도 5</div><div class="zone-info"><span id="count-복도_5">0</span></div>
+        <div id="card-Hallway_5" class="hallway-label" style="left: 290px; top: 300px;" onclick="showRoute('Hallway_5')">
+            <div class="zone-name">복도 5</div><div class="zone-info"><span id="count-Hallway_5">0</span></div>
         </div>
-        <div id="card-복도_6" class="hallway-label" style="left: 535px; top: 250px;" onclick="showRoute('복도_6')">
-            <div class="zone-name">복도 6</div><div class="zone-info"><span id="count-복도_6">0</span></div>
+        <div id="card-Hallway_6" class="hallway-label" style="left: 530px; top: 255px;" onclick="showRoute('Hallway_6')">
+            <div class="zone-name">복도 6</div><div class="zone-info"><span id="count-Hallway_6">0</span></div>
         </div>
-        <div id="card-복도_7" class="hallway-label" style="left: 585px; top: 345px;" onclick="showRoute('복도_7')">
-            <div class="zone-name">복도 7</div><div class="zone-info"><span id="count-복도_7">0</span></div>
-        </div>
-
-        <div id="card-방_1" class="zone-block" style="left: 0px; top: 0px; width: 110px; height: 150px;" onclick="showRoute('방_1')">
-            <div class="zone-name">방 1</div><div class="zone-info"><span id="count-방_1">0</span></div>
-        </div>
-        <div id="card-방_2" class="zone-block" style="left: 110px; top: 0px; width: 80px; height: 150px;" onclick="showRoute('방_2')">
-            <div class="zone-name">방 2</div><div class="zone-info"><span id="count-방_2">0</span></div>
-        </div>
-        <div id="card-방_3" class="zone-block" style="left: 190px; top: 0px; width: 130px; height: 190px;" onclick="showRoute('방_3')">
-            <div class="zone-name">방 3</div><div class="zone-info"><span id="count-방_3">0</span></div>
-        </div>
-        <div id="card-방_4" class="zone-block" style="left: 320px; top: 0px; width: 95px; height: 190px;" onclick="showRoute('방_4')">
-            <div class="zone-name">방 4</div><div class="zone-info"><span id="count-방_4">0</span></div>
-        </div>
-        <div id="card-방_5" class="zone-block" style="left: 415px; top: 0px; width: 95px; height: 190px;" onclick="showRoute('방_5')">
-            <div class="zone-name">방 5</div><div class="zone-info"><span id="count-방_5">0</span></div>
-        </div>
-        <div id="card-방_6" class="zone-block" style="left: 510px; top: 0px; width: 150px; height: 190px;" onclick="showRoute('방_6')">
-            <div class="zone-name">방 6</div><div class="zone-info"><span id="count-방_6">0</span></div>
-        </div>
-        <div id="card-방_7" class="zone-block" style="left: 0px; top: 250px; width: 190px; height: 190px;" onclick="showRoute('방_7')">
-            <div class="zone-name">방 7</div><div class="zone-info"><span id="count-방_7">0</span></div>
-        </div>
-        <div id="card-방_8" class="zone-block" style="left: 190px; top: 250px; width: 100px; height: 95px;" onclick="showRoute('방_8')">
-            <div class="zone-name">방 8</div><div class="zone-info"><span id="count-방_8">0</span></div>
-        </div>
-        <div id="card-방_9" class="zone-block" style="left: 190px; top: 345px; width: 100px; height: 95px;" onclick="showRoute('방_9')">
-            <div class="zone-name">방 9</div><div class="zone-info"><span id="count-방_9">0</span></div>
-        </div>
-        <div id="card-방_10" class="zone-block" style="left: 340px; top: 250px; width: 100px; height: 190px;" onclick="showRoute('방_10')">
-            <div class="zone-name">방 10</div><div class="zone-info"><span id="count-방_10">0</span></div>
-        </div>
-        <div id="card-방_11" class="zone-block" style="left: 440px; top: 250px; width: 90px; height: 60px;" onclick="showRoute('방_11')">
-            <div class="zone-name">방 11</div><div class="zone-info"><span id="count-방_11">0</span></div>
-        </div>
-        <div id="card-방_12" class="zone-block" style="left: 440px; top: 310px; width: 90px; height: 60px;" onclick="showRoute('방_12')">
-            <div class="zone-name">방 12</div><div class="zone-info"><span id="count-방_12">0</span></div>
-        </div>
-        <div id="card-방_13" class="zone-block" style="left: 440px; top: 370px; width: 90px; height: 70px;" onclick="showRoute('방_13')">
-            <div class="zone-name">방 13</div><div class="zone-info"><span id="count-방_13">0</span></div>
-        </div>
-        <div id="card-방_14" class="zone-block" style="left: 530px; top: 370px; width: 130px; height: 70px;" onclick="showRoute('방_14')">
-            <div class="zone-name">방 14</div><div class="zone-info"><span id="count-방_14">0</span></div>
-        </div>
-        <div id="card-방_15" class="zone-block" style="left: 570px; top: 190px; width: 90px; height: 150px;" onclick="showRoute('방_15')">
-            <div class="zone-name">방 15</div><div class="zone-info"><span id="count-방_15">0</span></div>
+        <div id="card-Hallway_7" class="hallway-label" style="left: 400px; top: 370px;" onclick="showRoute('Hallway_7')">
+            <div class="zone-name">복도 7</div><div class="zone-info"><span id="count-Hallway_7">0</span></div>
         </div>
     </div>
     
     <div id="route-container">클릭하여 최적 대피 경로를 확인하세요.</div>
-
     <script src="/static/scripts.js"></script>
 </body>
 </html>

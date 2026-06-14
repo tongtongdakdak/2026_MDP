@@ -11,20 +11,15 @@ def run_project():
         evac_process = subprocess.Popen([sys.executable, "evacuate.py"], text=True)
         processes.append(evac_process)
         time.sleep(2)
-        #client_process = subprocess.Popen([sys.executable, "client.py"], text=False)
-        #processes.append(client_process)
-        #time.sleep(2)
         subprocess.call([sys.executable, "yolo.py"])
-    except KeyboardInterrupt:
-        pass
-    except Exception:
+    except:
         pass
     finally:
         for p in processes:
             try:
                 p.terminate()
                 p.wait(timeout=2)
-            except Exception:
+            except:
                 pass
 
 if __name__ == "__main__":

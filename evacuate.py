@@ -6,72 +6,57 @@ class EvacuationEngine:
     def __init__(self, server_url='http://127.0.0.1:5000'):
         self.server_url = server_url
         self.graph = nx.Graph()
-        self.exits = ["출구_1", "출구_2", "출구_3"]
-        self.zones = [f"방_{i}" for i in range(1, 16)] + [f"복도_{i}" for i in range(1, 8)]
+        self.exits = ["Exit_1", "Exit_2", "Exit_3"]
+        self.zones = [f"Room_{i}" for i in range(1, 16)] + [f"Hallway_{i}" for i in range(1, 8)]
         self.init_building_map()
 
     def init_building_map(self):
-        self.graph.add_edge("방_1", "복도_1", base_dist=2.0)
-        self.graph.add_edge("방_2", "복도_1", base_dist=2.0)
-        self.graph.add_edge("방_3", "복도_2", base_dist=2.0)
-        self.graph.add_edge("방_4", "복도_3", base_dist=2.0)
-        self.graph.add_edge("방_5", "복도_4", base_dist=2.0)
-        self.graph.add_edge("방_6", "복도_4", base_dist=2.0)
-        
-        self.graph.add_edge("방_7", "복도_1", base_dist=2.0)
-        self.graph.add_edge("방_8", "복도_2", base_dist=2.0)
-        self.graph.add_edge("방_9", "복도_5", base_dist=2.0)
-        
-        self.graph.add_edge("방_10", "복도_3", base_dist=2.0)
-        
-        self.graph.add_edge("방_11", "복도_6", base_dist=1.5)
-        self.graph.add_edge("방_12", "복도_7", base_dist=1.5)
-        self.graph.add_edge("방_13", "방_10", base_dist=1.5)
-        self.graph.add_edge("방_15", "복도_6", base_dist=2.0)
-        
-        self.graph.add_edge("방_14", "복도_7", base_dist=2.0)
-        
-        #Hall to Hall
-        self.graph.add_edge("복도_1", "복도_2", base_dist=2.5)
-        self.graph.add_edge("복도_2", "복도_3", base_dist=2.5)
-        self.graph.add_edge("복도_3", "복도_4", base_dist=2.5)
-        self.graph.add_edge("복도_2", "복도_5", base_dist=2.5)
-        self.graph.add_edge("복도_3", "복도_5", base_dist=2.5)
-        self.graph.add_edge("복도_4", "복도_6", base_dist=2.5)
-        self.graph.add_edge("복도_6", "복도_7", base_dist=2.5)
-        
-        # Hall to Gate
-        self.graph.add_edge("복도_1", "출구_1", base_dist=2.0)
-        self.graph.add_edge("복도_5", "출구_2", base_dist=2.0)
-        self.graph.add_edge("복도_7", "출구_3", base_dist=2.0)
-        
+        self.graph.add_edge("Room_1", "Hallway_1", base_dist=2.0)
+        self.graph.add_edge("Room_2", "Hallway_1", base_dist=2.0)
+        self.graph.add_edge("Room_3", "Hallway_2", base_dist=2.0)
+        self.graph.add_edge("Room_4", "Hallway_3", base_dist=2.0)
+        self.graph.add_edge("Room_5", "Hallway_4", base_dist=2.0)
+        self.graph.add_edge("Room_6", "Hallway_4", base_dist=2.0)
+        self.graph.add_edge("Room_7", "Hallway_1", base_dist=2.0)
+        self.graph.add_edge("Room_8", "Hallway_2", base_dist=2.0)
+        self.graph.add_edge("Room_9", "Hallway_5", base_dist=2.0)
+        self.graph.add_edge("Room_10", "Hallway_3", base_dist=2.0)
+        self.graph.add_edge("Room_11", "Hallway_6", base_dist=1.5)
+        self.graph.add_edge("Room_12", "Hallway_7", base_dist=1.5)
+        self.graph.add_edge("Room_13", "Room_10", base_dist=1.5)
+        self.graph.add_edge("Room_15", "Hallway_6", base_dist=2.0)
+        self.graph.add_edge("Room_14", "Hallway_7", base_dist=2.0)
+        self.graph.add_edge("Hallway_1", "Hallway_2", base_dist=3.0)
+        self.graph.add_edge("Hallway_2", "Hallway_3", base_dist=3.0)
+        self.graph.add_edge("Hallway_3", "Hallway_4", base_dist=3.0)
+        self.graph.add_edge("Hallway_2", "Hallway_5", base_dist=3.0)
+        self.graph.add_edge("Hallway_3", "Hallway_6", base_dist=3.0)
+        self.graph.add_edge("Hallway_4", "Hallway_7", base_dist=3.0)
+        self.graph.add_edge("Hallway_1", "Exit_1", base_dist=1.0)
+        self.graph.add_edge("Hallway_5", "Exit_2", base_dist=1.0)
+        self.graph.add_edge("Hallway_7", "Exit_3", base_dist=1.0)
+
     def fetch_sensor_data(self):
         try:
             response = requests.get(f"{self.server_url}/get-data", timeout=1.0)
             if response.status_code == 200:
                 return response.json()
-        except Exception:
-            return None
+        except:
+            pass
         return None
 
-    def calculate_dynamic_weights(self, server_data):
+    def calculate_dynamic_weights(self, data):
         working_graph = self.graph.copy()
         edges_to_remove = []
-        
         for u, v in working_graph.edges():
-            u_fire = server_data.get(u, {}).get('fire_detected', False) if u in server_data else False
-            v_fire = server_data.get(v, {}).get('fire_detected', False) if v in server_data else False
-            
-            if u_fire or v_fire:
+            base_dist = working_graph[u][v]['base_dist']
+            if data.get(u, {}).get('fire_detected', False) or data.get(v, {}).get('fire_detected', False):
                 edges_to_remove.append((u, v))
                 continue
-                
-            base_dist = working_graph[u][v]['base_dist']
-            u_figure = server_data.get(u, {}).get('figure_count', 0) if u in server_data else 0
-            v_figure = server_data.get(v, {}).get('figure_count', 0) if v in server_data else 0
-            figure_penalty = 1.0 + (0.4 * max(u_figure, v_figure))
+            u_count = data.get(u, {}).get('figure_count', 0)
+            v_count = data.get(v, {}).get('figure_count', 0)
+            figure_penalty = 1.0 + ((u_count + v_count) * 0.2)
             working_graph[u][v]['weight'] = base_dist * figure_penalty
-            
         working_graph.remove_edges_from(edges_to_remove)
         return working_graph
 
@@ -90,12 +75,13 @@ class EvacuationEngine:
                 except nx.NetworkXNoPath:
                     continue
             if best_route:
-                routes[zone] = " -> ".join(best_route).replace("_", " ")
+                kor_text = " -> ".join([n.replace("Room_", "방 ").replace("Hallway_", "복도 ").replace("Exit_", "출구 ") for n in best_route])
+                routes[zone] = {"text": kor_text, "path": best_route}
             else:
-                routes[zone] = "고립됨 (대피 경로 없음)"
+                routes[zone] = {"text": "고립됨 (대피 경로 없음)", "path": []}
         try:
             requests.post(f"{self.server_url}/update-routes", json=routes, timeout=1.0)
-        except Exception:
+        except:
             pass
 
     def start_engine(self):
@@ -104,7 +90,7 @@ class EvacuationEngine:
             if data:
                 updated_graph = self.calculate_dynamic_weights(data)
                 self.find_evacuation_routes(updated_graph)
-            time.sleep(0.5)
+            time.sleep(1)
 
 if __name__ == "__main__":
     engine = EvacuationEngine()

@@ -4,3 +4,5 @@ client.py제외
 # third commit
 stm으로 보내주는 부분을 단순0,1에서 구역명 혹은 SAFE로 변경해 아스키코드로 전송
 html만 존재하던부분을 css와 js, html로 분할
+# 4th commit
+한글로 작성된 부분이 있는 코드를 영어화
