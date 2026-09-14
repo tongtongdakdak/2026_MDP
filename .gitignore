@@ -5,6 +5,7 @@ captured_frames/
 preprocess/
 *.zip
 *.pt
+*.mp4
 *.c
 *.txt
 args.yaml

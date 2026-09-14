@@ -1,4 +1,5 @@
 import os
+import json
 from ultralytics import YOLO
 
 DRIVE_SAVE_PATH = r'C:\Users\namul\Desktop\2026_MDP'
@@ -15,24 +16,8 @@ def train_yolo():
     else:
         model = YOLO('yolo26n.pt') 
         
-        model.train(
-            data=r"C:\Users\namul\Desktop\2026_MDP\dataset\data.yaml",
-            epochs=500,
-            patience=50,
-            batch=16,
-            imgsz=640,
-            device='cpu',
-            optimizer='AdamW',
-            lr0=1e-6,
-            cos_lr=False,
-            close_mosaic=25,
-            cls=5.5,
-            box=9.5,
-            dfl=2.0,
-            degrees=25.0,
-            flipud=0.5,
-            fliplr=0.5,
-            project=r"C:\Users\namul\Desktop\2026_MDP",
-            name="lego_detection_5",
-            exist_ok=True
-        )
+        config_path = os.path.join(DRIVE_SAVE_PATH, 'config.json')
+        with open(config_path, 'r', encoding='utf-8') as f:
+            train_config = json.load(f)
+        
+        model.train(**train_config)

@@ -16,7 +16,7 @@ def run_project():
         time.sleep(2)
 
         print("3/3 yolo detection")
-        processes['YOLOv26n'] = subprocess.Popen([python_executable, "yolo.py"])
+        processes['YOLOv26n'] = subprocess.Popen([python_executable, "test_yolo.py"])
 
         print("\nall process activated")
         
