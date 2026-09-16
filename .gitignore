@@ -6,7 +6,6 @@ preprocess/
 *.zip
 *.pt
 *.mp4
-*.c
 소감문.txt
 소프트웨어 설계.txt
 args.yaml
