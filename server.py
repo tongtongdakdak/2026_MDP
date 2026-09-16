@@ -104,12 +104,11 @@ def serial_writer_thread(): # STM
                 
                 hallway_str = ",".join(hallway_states)
                 
-                # msg = f"{fire_status_str},{fire_zones_str},{crowded_sector},{hallway_str}\n\r"
-                msg = f"{fire_status_str},{fire_zones_str},{crowded_sector}\n\r"
-                                
+                msg = f"{fire_status_str},{fire_zones_str},{crowded_sector},{hallway_str}\n\r"
+                
                 ser.write(msg.encode('utf-8'))
                 print(f"stm send {msg.strip()}")
-                time.sleep(3.0)
+                time.sleep(2.0)
                 
         except Exception as e:
             print(f"serial Error | disconnected. retry 3sec ({e})")

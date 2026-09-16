@@ -7,7 +7,8 @@ preprocess/
 *.pt
 *.mp4
 *.c
-*.txt
+소감문.txt
+소프트웨어 설계.txt
 args.yaml
 lego_detection/
 lego_detection_1/

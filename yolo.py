@@ -8,7 +8,7 @@ from shapely.geometry import Point, Polygon
 from picamera2 import Picamera2
 
 class ObjectDetector:
-    def __init__(self, model_path='best.pt', server_url='http://127.0.0.1:5000/detection'):
+    def __init__(self, model_path='exp-10.pt', server_url='http://127.0.0.1:5000/detection'):
         self.model = YOLO(model_path)
         self.server_url = server_url
         self.picam = None
